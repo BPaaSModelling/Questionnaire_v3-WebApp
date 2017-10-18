@@ -1,0 +1,18 @@
+<div>
+  <md-card>
+  <md-card-subtitle *ngIf="!qService.setupPhase">Question: {{qService.questionIndex+1}}/{{qService.questionList.length}}</md-card-subtitle>
+  <md-card-subtitle>Category: {{qItem.domainLabel}}</md-card-subtitle>
+  <md-card-title>{{qItem.questionLabel}}</md-card-title>
+
+    <search-question *ngIf="qItem.answerType==SEARCHSELECTION" [qItem]="qItem"></search-question>
+
+    <singleselection-question *ngIf="qItem.answerType==SINGLESELECTION" [qItem]="qItem"></singleselection-question>
+
+    <valueinsert-question *ngIf="qItem.answerType==VALUEINSERT" [qItem]="qItem"></valueinsert-question>
+
+    <multiselect-question *ngIf="qItem.answerType==MULTISELECTION" [qItem]="qItem"></multiselect-question>
+
+
+</md-card>
+</div>
+

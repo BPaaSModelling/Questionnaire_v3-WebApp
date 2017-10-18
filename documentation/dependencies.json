@@ -1,0 +1,535 @@
+[
+  {
+    "name": "AppRoutingModule",
+    "file": "__path__/app/app-routing.module.ts",
+    "providers": [],
+    "declarations": [],
+    "imports": [
+      {
+        "ns": "RouterModule",
+        "name": "RouterModule.forRoot(args)"
+      }
+    ],
+    "exports": [
+      {
+        "name": "RouterModule"
+      }
+    ],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 178,
+        "end": 220,
+        "flags": 0,
+        "kind": 261,
+        "name": {
+          "pos": 178,
+          "end": 188,
+          "flags": 0,
+          "text": "imports"
+        },
+        "initializer": {
+          "pos": 189,
+          "end": 220,
+          "flags": 0,
+          "kind": 177,
+          "elements": [
+            {
+              "pos": 191,
+              "end": 219,
+              "flags": 0,
+              "kind": 181,
+              "expression": {
+                "pos": 191,
+                "end": 211,
+                "flags": 0,
+                "kind": 179,
+                "expression": {
+                  "pos": 191,
+                  "end": 203,
+                  "flags": 0,
+                  "text": "RouterModule"
+                },
+                "name": {
+                  "pos": 204,
+                  "end": 211,
+                  "flags": 0,
+                  "text": "forRoot"
+                }
+              },
+              "arguments": [
+                {
+                  "pos": 212,
+                  "end": 218,
+                  "flags": 0,
+                  "text": "routes"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 221,
+        "end": 247,
+        "flags": 0,
+        "kind": 261,
+        "name": {
+          "pos": 221,
+          "end": 231,
+          "flags": 0,
+          "text": "exports"
+        },
+        "initializer": {
+          "pos": 232,
+          "end": 247,
+          "flags": 0,
+          "kind": 177,
+          "elements": [
+            {
+              "pos": 234,
+              "end": 246,
+              "flags": 0,
+              "text": "RouterModule"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "AppModule",
+    "file": "src/app/app.module.ts",
+    "providers": [
+      {
+        "name": "QuestionnaireService"
+      }
+    ],
+    "declarations": [
+      {
+        "name": "AppComponent",
+        "file": "src/app/app.component.ts",
+        "selector": "app-root",
+        "providers": [],
+        "templateUrl": [
+          "app.component.html"
+        ],
+        "styleUrls": [
+          "app.component.css"
+        ],
+        "__raw": [
+          {
+            "pos": 195,
+            "end": 218,
+            "flags": 0,
+            "kind": 261,
+            "name": {
+              "pos": 195,
+              "end": 206,
+              "flags": 0,
+              "text": "selector"
+            },
+            "initializer": {
+              "pos": 207,
+              "end": 218,
+              "flags": 0,
+              "kind": 9,
+              "text": "app-root"
+            }
+          },
+          {
+            "pos": 219,
+            "end": 257,
+            "flags": 0,
+            "kind": 261,
+            "name": {
+              "pos": 219,
+              "end": 233,
+              "flags": 0,
+              "text": "templateUrl"
+            },
+            "initializer": {
+              "pos": 234,
+              "end": 257,
+              "flags": 0,
+              "kind": 9,
+              "text": "./app.component.html"
+            }
+          },
+          {
+            "pos": 258,
+            "end": 295,
+            "flags": 0,
+            "kind": 261,
+            "name": {
+              "pos": 258,
+              "end": 270,
+              "flags": 0,
+              "text": "styleUrls"
+            },
+            "initializer": {
+              "pos": 271,
+              "end": 295,
+              "flags": 0,
+              "kind": 177,
+              "elements": [
+                {
+                  "pos": 273,
+                  "end": 294,
+                  "flags": 0,
+                  "kind": 9,
+                  "text": "./app.component.css"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "ServiceDiscoveryComponent"
+      },
+      {
+        "name": "QuestionnaireItemComponent"
+      },
+      {
+        "name": "SearchQuestionComponent"
+      },
+      {
+        "name": "SingleselectionQuestionComponent"
+      },
+      {
+        "name": "ValueinsertQuestionComponent"
+      },
+      {
+        "name": "MultiselectQuestionComponent"
+      }
+    ],
+    "imports": [
+      {
+        "name": "BrowserModule"
+      },
+      {
+        "name": "FormsModule"
+      },
+      {
+        "name": "HttpModule"
+      },
+      {
+        "ns": "RouterModule",
+        "name": "RouterModule.forRoot(args)"
+      },
+      {
+        "name": "BrowserAnimationsModule"
+      },
+      {
+        "name": "MdToolbarModule"
+      },
+      {
+        "name": "MdButtonModule"
+      },
+      {
+        "name": "MdCardModule"
+      },
+      {
+        "name": "MdSidenavModule"
+      },
+      {
+        "name": "MdInputModule"
+      },
+      {
+        "name": "MdRadioModule"
+      },
+      {
+        "name": "MdListModule"
+      },
+      {
+        "name": "MdCheckboxModule"
+      },
+      {
+        "name": "JsonpModule"
+      },
+      {
+        "name": "ReactiveFormsModule"
+      }
+    ],
+    "exports": [],
+    "bootstrap": [
+      {
+        "name": "AppComponent"
+      }
+    ],
+    "__raw": [
+      {
+        "pos": 1496,
+        "end": 1734,
+        "flags": 0,
+        "kind": 261,
+        "name": {
+          "pos": 1496,
+          "end": 1511,
+          "flags": 0,
+          "text": "declarations"
+        },
+        "initializer": {
+          "pos": 1512,
+          "end": 1734,
+          "flags": 0,
+          "kind": 177,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 1514,
+              "end": 1531,
+              "flags": 0,
+              "text": "AppComponent"
+            },
+            {
+              "pos": 1532,
+              "end": 1562,
+              "flags": 0,
+              "text": "ServiceDiscoveryComponent"
+            },
+            {
+              "pos": 1563,
+              "end": 1594,
+              "flags": 0,
+              "text": "QuestionnaireItemComponent"
+            },
+            {
+              "pos": 1595,
+              "end": 1623,
+              "flags": 0,
+              "text": "SearchQuestionComponent"
+            },
+            {
+              "pos": 1624,
+              "end": 1661,
+              "flags": 0,
+              "text": "SingleselectionQuestionComponent"
+            },
+            {
+              "pos": 1662,
+              "end": 1695,
+              "flags": 0,
+              "text": "ValueinsertQuestionComponent"
+            },
+            {
+              "pos": 1696,
+              "end": 1729,
+              "flags": 0,
+              "text": "MultiselectQuestionComponent"
+            }
+          ]
+        }
+      },
+      {
+        "pos": 1735,
+        "end": 2069,
+        "flags": 0,
+        "kind": 261,
+        "name": {
+          "pos": 1735,
+          "end": 1745,
+          "flags": 0,
+          "text": "imports"
+        },
+        "initializer": {
+          "pos": 1746,
+          "end": 2069,
+          "flags": 0,
+          "kind": 177,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 1748,
+              "end": 1766,
+              "flags": 0,
+              "text": "BrowserModule"
+            },
+            {
+              "pos": 1767,
+              "end": 1783,
+              "flags": 0,
+              "text": "FormsModule"
+            },
+            {
+              "pos": 1784,
+              "end": 1799,
+              "flags": 0,
+              "text": "HttpModule"
+            },
+            {
+              "pos": 1800,
+              "end": 1836,
+              "flags": 0,
+              "kind": 181,
+              "expression": {
+                "pos": 1800,
+                "end": 1825,
+                "flags": 0,
+                "kind": 179,
+                "expression": {
+                  "pos": 1800,
+                  "end": 1817,
+                  "flags": 0,
+                  "text": "RouterModule"
+                },
+                "name": {
+                  "pos": 1818,
+                  "end": 1825,
+                  "flags": 0,
+                  "text": "forRoot"
+                }
+              },
+              "arguments": [
+                {
+                  "pos": 1826,
+                  "end": 1835,
+                  "flags": 0,
+                  "text": "appRoutes"
+                }
+              ]
+            },
+            {
+              "pos": 1837,
+              "end": 1865,
+              "flags": 0,
+              "text": "BrowserAnimationsModule"
+            },
+            {
+              "pos": 1866,
+              "end": 1886,
+              "flags": 0,
+              "text": "MdToolbarModule"
+            },
+            {
+              "pos": 1887,
+              "end": 1906,
+              "flags": 0,
+              "text": "MdButtonModule"
+            },
+            {
+              "pos": 1907,
+              "end": 1924,
+              "flags": 0,
+              "text": "MdCardModule"
+            },
+            {
+              "pos": 1925,
+              "end": 1945,
+              "flags": 0,
+              "text": "MdSidenavModule"
+            },
+            {
+              "pos": 1946,
+              "end": 1964,
+              "flags": 0,
+              "text": "MdInputModule"
+            },
+            {
+              "pos": 1965,
+              "end": 1983,
+              "flags": 0,
+              "text": "MdRadioModule"
+            },
+            {
+              "pos": 1984,
+              "end": 2001,
+              "flags": 0,
+              "text": "MdListModule"
+            },
+            {
+              "pos": 2002,
+              "end": 2023,
+              "flags": 0,
+              "text": "MdCheckboxModule"
+            },
+            {
+              "pos": 2024,
+              "end": 2040,
+              "flags": 0,
+              "text": "JsonpModule"
+            },
+            {
+              "pos": 2041,
+              "end": 2065,
+              "flags": 0,
+              "text": "ReactiveFormsModule"
+            }
+          ]
+        }
+      },
+      {
+        "pos": 2070,
+        "end": 2106,
+        "flags": 0,
+        "kind": 261,
+        "name": {
+          "pos": 2070,
+          "end": 2082,
+          "flags": 0,
+          "text": "providers"
+        },
+        "initializer": {
+          "pos": 2083,
+          "end": 2106,
+          "flags": 0,
+          "kind": 177,
+          "elements": [
+            {
+              "pos": 2085,
+              "end": 2105,
+              "flags": 0,
+              "text": "QuestionnaireService"
+            }
+          ]
+        }
+      },
+      {
+        "pos": 2107,
+        "end": 2135,
+        "flags": 0,
+        "kind": 261,
+        "name": {
+          "pos": 2107,
+          "end": 2119,
+          "flags": 0,
+          "text": "bootstrap"
+        },
+        "initializer": {
+          "pos": 2120,
+          "end": 2135,
+          "flags": 0,
+          "kind": 177,
+          "elements": [
+            {
+              "pos": 2122,
+              "end": 2134,
+              "flags": 0,
+              "text": "AppComponent"
+            }
+          ]
+        }
+      },
+      {
+        "pos": 2136,
+        "end": 2158,
+        "flags": 0,
+        "kind": 261,
+        "name": {
+          "pos": 2136,
+          "end": 2154,
+          "flags": 0,
+          "text": "entryComponents"
+        },
+        "initializer": {
+          "pos": 2155,
+          "end": 2158,
+          "flags": 0,
+          "kind": 177,
+          "elements": []
+        }
+      }
+    ]
+  }
+]

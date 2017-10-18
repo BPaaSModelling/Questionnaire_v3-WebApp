@@ -1,0 +1,11 @@
+
+<md-card-content>
+  <div *ngFor="let aItem of qItem.answerList">
+    <p>
+      <md-checkbox (click)="handleMultiSelect(aItem)">{{aItem.answerLabel}}</md-checkbox>
+    </p>
+  </div>
+</md-card-content>
+<md-card-actions>
+  <button md-raised-button md-button (click)="nextQuestion()" [disabled]="givenAnswer.length<=0" >Next</button>
+</md-card-actions>

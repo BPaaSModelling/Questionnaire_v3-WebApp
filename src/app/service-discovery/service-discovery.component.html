@@ -1,0 +1,22 @@
+<md-sidenav #sidenav opened="true" align="end">
+  <h3 md-header>Services</h3>
+  <md-list>
+  <div *ngFor="let service of (qService.suitableCloudService$ | async)">
+  <md-list-item>
+    {{service.answerLabel}}
+  </md-list-item>
+  <md-divider></md-divider>
+  </div>
+  </md-list>
+</md-sidenav>
+
+
+
+<!--<md-nav-list>
+  <h3 md-header>Services</h3>
+  <md-list-item *ngFor="let service of serviceData">
+    {{service.name}}
+  </md-list-item>
+</md-nav-list>
+
+-->

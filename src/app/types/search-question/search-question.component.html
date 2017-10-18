@@ -1,0 +1,14 @@
+<md-card-content>
+<md-input-container>
+    <input mdInput placeholder="search" (keyup)="search(givenAnswer.answerLabel)" [(ngModel)]="givenAnswer.answerLabel" required>
+  </md-input-container>
+  <md-nav-list>
+    <md-list-item *ngFor="let item of (qService.searchResults$ | async)">
+      <a md-line (click)="handleSearchSelect(item)">{{ item.label }}</a>
+    </md-list-item>
+  </md-nav-list>
+
+  </md-card-content>
+  <md-card-actions>
+    <button md-raised-button md-button (click)="nextQuestion()" [disabled]="givenAnswer==='' || givenAnswer==null" >Next</button>
+  </md-card-actions>

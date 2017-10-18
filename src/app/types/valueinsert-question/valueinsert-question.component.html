@@ -1,0 +1,24 @@
+<md-card-content>
+
+      <md-input-container>
+        <input mdInput placeholder="Insert your value here" value="" [(ngModel)]="answerValue" required>
+      </md-input-container>
+
+  <p>Please select the comparison<br>operation of your entered value.</p>
+  <p><md-radio-group class="radio-group">
+    <div *ngFor="let cItem of qItem.comparisonOperationAnswers">
+      <md-radio-button class="radio-button"
+                       [value]="cItem"
+                       (click)="handleOperationsSingleSelect(cItem.answerID)">
+        {{cItem.answerLabel}}
+      </md-radio-button>
+    </div>
+  </md-radio-group>
+  </p>
+
+</md-card-content>
+<md-card-actions>
+  <button md-raised-button md-button (click)="nextQuestion()" [disabled]="answerValue==='' || answerValue==null || comparisonAnswerCode==='' || comparisonAnswerCode==null">Next</button>
+</md-card-actions>
+
+
