@@ -1,6 +1,6 @@
 <div>
   <md-card>
-  <md-card-subtitle *ngIf="!qService.setupPhase">Question: {{qService.questionIndex+1}}/{{qService.questionList.length}}</md-card-subtitle>
+  <md-card-subtitle *ngIf="!qService.setupPhase">Question #{{qService.QUESTIONNAIRE.currentQuestionIndex+1}}</md-card-subtitle>
   <md-card-subtitle>Category: {{qItem.domainLabel}}</md-card-subtitle>
   <md-card-title>{{qItem.questionLabel}}</md-card-title>
 

@@ -3,7 +3,6 @@ import {Http, Headers, RequestOptions, URLSearchParams, Jsonp} from '@angular/ht
 import {EndpointSettings} from '../_settings/endpoint.settings';
 import {SearchResultModel} from '../_models/searchresult.model';
 import {CloudServiceModel} from '../_models/cloudservice.model';
-import {ServiceModel} from '../_models/service.model';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {CloudServiceElementModel} from '../_models/cloudservice-element.model';
 import {InsertCSService} from '../admin-insert-cloudservice.service';

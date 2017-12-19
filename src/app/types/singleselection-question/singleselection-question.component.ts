@@ -30,9 +30,9 @@ export class SingleselectionQuestionComponent implements OnInit {
     //Object.assign(this.qItem.givenAnswerList,[this.answerCode]);
 
     //this.qService.updateQuestionnaire();
-    this.qService.questionList[this.qService.questionIndex].givenAnswerList.push(this.givenAnswer);
+    this.qService.QUESTIONNAIRE.completedQuestionList[this.qService.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.push(this.givenAnswer);
     this.givenAnswer = null;
-    this.qService.nextQuestion();
+      this.qService.updateQuestionnaire();
   }
 
 }

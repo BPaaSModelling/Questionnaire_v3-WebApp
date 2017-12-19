@@ -36,9 +36,9 @@ export class MultiselectQuestionComponent implements OnInit {
     if (this.qService.setupPhase) {
         this.qService.initialDomains = this.givenAnswer;
     } else {
-        this.qService.questionList[this.qService.questionIndex].givenAnswerList = this.givenAnswer;
+      this.qService.QUESTIONNAIRE.completedQuestionList[this.qService.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList = this.givenAnswer;
     }
     this.givenAnswer = [];
-    this.qService.nextQuestion();
+      this.qService.updateQuestionnaire();
   }
 }

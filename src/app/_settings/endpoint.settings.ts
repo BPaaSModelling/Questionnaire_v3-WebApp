@@ -9,24 +9,13 @@ export class EndpointSettings {
 
 
   private static QUESTIONNAIRE  : string = '/questionnaire';
-  private static DISCOVER       : string = '/discover';
-  private static DRILLDOWN      : string = '/drilldown';
   private static SEARCH         : string = '/search?';
   private static CSELEMENTS     : string = '/cloudservice/cselements';
   private static ADDCS          : string = '/cloudservice/addcs';
   private static QUESTIONDOMAINS: string = '/getDomains';
-  private static QUESTIONSFROMDOMAINS: string = '/getQuestionsFromDomains';
+  private static NEXTQUESTION: string = '/getNextQuestion';
   private static SUITABLECLOUDSERVICES: string = '/getSuitableCloudservices';
 
-  public static getQuestionnaireEndpoint(): string {
-    return EndpointSettings.ENDPOINT + EndpointSettings.QUESTIONNAIRE;
-  }
-  public static getServiceDiscoveryEndpoint(): string {
-    return EndpointSettings.ENDPOINT + EndpointSettings.DISCOVER;
-  }
-  public static getDrilldownEndpoint(): string {
-    return EndpointSettings.ENDPOINT + EndpointSettings.DRILLDOWN;
-  }
   public static getSearchEndpoint(): string {
     return EndpointSettings.ENDPOINT + EndpointSettings.SEARCH;
   }
@@ -39,8 +28,8 @@ export class EndpointSettings {
   public static getQuestionDomainsEndpoint(): string {
     return EndpointSettings.ENDPOINT + EndpointSettings.QUESTIONNAIRE + EndpointSettings.QUESTIONDOMAINS;
   }
-  public static getQuestionsFromDomainsEndpoint(): string {
-    return EndpointSettings.ENDPOINT + EndpointSettings.QUESTIONNAIRE + EndpointSettings.QUESTIONSFROMDOMAINS;
+  public static getNextQuestionEndpoint(): string {
+    return EndpointSettings.ENDPOINT + EndpointSettings.QUESTIONNAIRE + EndpointSettings.NEXTQUESTION;
   }
   public static getSuitableCloudServicesEndpoint(): string {
     return EndpointSettings.ENDPOINT + EndpointSettings.QUESTIONNAIRE + EndpointSettings.SUITABLECLOUDSERVICES;

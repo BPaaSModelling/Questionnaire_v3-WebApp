@@ -16,4 +16,6 @@ export class QuestionModel {
   domainLabel: string;
   annotationRelation: string;
   ruleToApply: string;
+
+
 }

@@ -37,9 +37,9 @@ export class SearchQuestionComponent implements OnInit {
 //    this.answerCode = null;
 //    this.answerLabel = null;
     //this.qService.updateQuestionnaire();
-    this.qService.questionList[this.qService.questionIndex].givenAnswerList.push(this.givenAnswer);
+    this.qService.QUESTIONNAIRE.completedQuestionList[this.qService.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.push(this.givenAnswer);
     this.givenAnswer = new AnswerModel;
-    this.qService.nextQuestion();
+      this.qService.updateQuestionnaire();
   }
 
 }

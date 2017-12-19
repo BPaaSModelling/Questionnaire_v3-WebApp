@@ -13,7 +13,7 @@ export class UserQuestionnaireComponent implements OnInit {
   constructor(private qService: QuestionnaireService) {
     this.qService.setupNewQuestionnaire();
 
-    this.qService.updateQuestionnaire.subscribe(
+    this.qService.askForDomainQuestion.subscribe(
         data => {
           this.question = data;
         });
@@ -26,7 +26,7 @@ export class UserQuestionnaireComponent implements OnInit {
   private startNewQuestionnaire(): void {
     console.log('start New Questionnaire');
     this.qService.setupNewQuestionnaire();
-      this.qService.updateQuestionnaire.subscribe(
+      this.qService.askForDomainQuestion.subscribe(
           data => {
               this.question = data;
           });

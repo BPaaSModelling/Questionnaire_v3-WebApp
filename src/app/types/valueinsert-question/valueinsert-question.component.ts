@@ -32,11 +32,11 @@ export class ValueinsertQuestionComponent implements OnInit {
       const givenAnswer: AnswerModel = new AnswerModel;
       givenAnswer.answerID = this.answerValue;
       givenAnswer.answerLabel = this.answerValue;
-      this.qService.questionList[this.qService.questionIndex].givenAnswerList.push(givenAnswer);
-      this.qService.questionList[this.qService.questionIndex].comparisonAnswer = this.comparisonAnswerCode;
+      this.qService.QUESTIONNAIRE.completedQuestionList[this.qService.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.push(givenAnswer);
+      this.qService.QUESTIONNAIRE.completedQuestionList[this.qService.QUESTIONNAIRE.currentQuestionIndex].comparisonAnswer = this.comparisonAnswerCode;
       this.answerValue = null;
       this.comparisonAnswerCode = null;
-      this.qService.nextQuestion();
+      this.qService.updateQuestionnaire();
   }
 
 }

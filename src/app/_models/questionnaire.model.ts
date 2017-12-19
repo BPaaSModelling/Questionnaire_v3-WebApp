@@ -1,11 +1,16 @@
 import {QuestionModel} from './question.model';
+import {AnswerModel} from "./answer.model";
 
 export class QuestionnaireModel {
-
-  public questionList: QuestionModel[];
   public completed: boolean;
-  public lastQuestionID: number;
-  public currentQuestionDomain: string;
-  public completedQuestionDomainList: string[];
+  public completedQuestionList: QuestionModel[];
+  public currentQuestionIndex: number;
+  public selectedDomainList: AnswerModel[];
 
+    constructor() {
+        this.completed = false;
+        this.completedQuestionList = [];
+        this.currentQuestionIndex = 0;
+        this.selectedDomainList = [];
+    }
 }

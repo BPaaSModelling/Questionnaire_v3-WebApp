@@ -33,8 +33,7 @@ export class SearchInsertComponent implements OnInit {
   }
 
   private search(term: string, index: number): void {
-
-
+      
     this.insertService.searchResults$ = null;
     this.queriedIndex = this.i;
     //console.log("queried index is now: " + this.queriedIndex)

@@ -15,14 +15,14 @@ import {AnswerModel} from './_models/answer.model';
 
 @Injectable()
 export class QuestionnaireService {
-  private options: RequestOptions;
 
-  private questionBehaviour:BehaviorSubject<QuestionModel> = new BehaviorSubject(new QuestionModel());
-  setupPhase: boolean;
-  questionList: QuestionModel[] = [];
-  questionIndex: number;
-  searchResults$: Observable<SearchResultModel[]> = Observable.of(null);
+
+  public QUESTIONNAIRE: QuestionnaireModel;
   public initialDomains: AnswerModel[] = [];
+  public setupPhase: boolean;
+  private questionBehaviour:BehaviorSubject<QuestionModel> = new BehaviorSubject(new QuestionModel());
+  private options: RequestOptions;
+  searchResults$: Observable<SearchResultModel[]> = Observable.of(null);
   suitableCloudService$: Observable<AnswerModel[]> = Observable.of(null);
 
   constructor(
@@ -34,11 +34,10 @@ export class QuestionnaireService {
 
 
     public setupNewQuestionnaire() {
+      this.QUESTIONNAIRE = new QuestionnaireModel();
+      this.setupPhase = true;
       this.initialDomains = [];
-        this.setupPhase = true;
-        this.questionList = [];
         this.queryDomains();
-        this.questionIndex = -1;
         this.suitableCloudService$ = Observable.of(null);
     }
 
@@ -49,7 +48,9 @@ export class QuestionnaireService {
                 console.log('Domain received: ' + JSON.stringify(data));
                 //this.csField$ = Observable.of(data);
                 for (let i = 0; i < data.length; i++){
-                    this.initialDomains.push(data[i]);
+                    if (data[i].answerLabel !== "Functional" && data[i].answerLabel !== "NotSortedYet"){
+                        this.initialDomains.push(data[i]);
+                    }
                 }
                 console.log('Elements parsing with success!');
 
@@ -57,13 +58,7 @@ export class QuestionnaireService {
 
     }
 
-  //public get selectedQItem() {
-   //return this.qItemBehaviour.asObservable();
-   //}
-
-    public get updateQuestionnaire() {
-
-      if (this.setupPhase){
+    public get askForDomainQuestion() {
 
         var question_of_domains: QuestionModel = new QuestionModel();
         question_of_domains.questionLabel = "Please, select the domain(s) of the questions";
@@ -74,14 +69,10 @@ export class QuestionnaireService {
         //this._questionList.push(question_of_domains);
           this.questionBehaviour.next( question_of_domains);
           return this.questionBehaviour.asObservable();
-      } else {
-          this.questionBehaviour.next(this.questionList[this.questionIndex]);
-          console.log("come hai fatto a finire qui?!?")
-      }
 
     }
 
-  public search(ns: string, term: string, classes: boolean) {
+    public search(ns: string, term: string, classes: boolean) {
 
     console.log("search received: " +ns +" :: " + term + " :: " + classes);
     let search = new URLSearchParams()
@@ -100,41 +91,9 @@ export class QuestionnaireService {
       }, error => console.log('Could not query services'));
   }
 
-  public nextQuestion(): void {
-
-        if (this.setupPhase){
-            this.queryQuestionsFromDomains()
-            this.questionIndex = -1;
-            this.setupPhase = false;
-
-        } else {
-            this.questionIndex = this.questionIndex+1;
-            this.questionBehaviour.next(this.questionList[this.questionIndex]);
-            console.log(this.questionIndex +" of " + this.questionList.length);
-            console.log(this.questionList);
-        }
-      this.queryCloudServices();
-    }
-    public queryQuestionsFromDomains(): void {
-        let myParams = new URLSearchParams()
-            myParams.append('domains',JSON.stringify(this.initialDomains))
-        this.http.get(EndpointSettings.getQuestionsFromDomainsEndpoint(), { search: myParams })
-            .map(response => response.json()).subscribe(
-            data => {
-
-                console.log("Results from querying questions from domains: " +JSON.stringify(data));
-                for (let i = 0; i < data.length; i++){
-                    this.questionList.push(data[i]);
-                }
-            this.nextQuestion();
-
-
-            }, error => console.log('Could not query services'));
-    }
-
     public queryCloudServices(): void {
         let myParams = new URLSearchParams()
-        myParams.append('questionList',JSON.stringify(this.questionList))
+        myParams.append('questionList',JSON.stringify(this.QUESTIONNAIRE.completedQuestionList))
         this.http.get(EndpointSettings.getSuitableCloudServicesEndpoint(), { search: myParams })
             .map(response => response.json()).subscribe(
             data => {
@@ -145,12 +104,48 @@ export class QuestionnaireService {
             }, error => console.log('Could not query services'));
     }
 
+    public updateQuestionnaire(): void{
+
+
+        if (this.setupPhase){
+            this.QUESTIONNAIRE.selectedDomainList = this.initialDomains;
+            console.log("Update domains");
+            this.setupPhase = false;
+        }else{
+            this.QUESTIONNAIRE.currentQuestionIndex++;
+        }
+
+        console.log("Ask for the next question");
+
+
+
+        this.http.post(EndpointSettings.getNextQuestionEndpoint(), this.QUESTIONNAIRE)
+            .map(response => response.json()).subscribe(
+            data => {
+
+                console.log("Results from querying next question: " +JSON.stringify(data));
+
+                    this.QUESTIONNAIRE.completedQuestionList.push(data);
+                    console.log(this.QUESTIONNAIRE);
+                    this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
+
+
+            }, error => {
+                console.log('Could not query next question');
+                this.QUESTIONNAIRE.completed = true;
+            });
+
+
+        //console.log(this.QUESTIONNAIRE);
+
+    }
+
     get getQuestionList(): QuestionModel[] {
-        return this.questionList;
+        return this.QUESTIONNAIRE.completedQuestionList;
     }
 
     get getQuestionIndex(): number {
-        return this.questionIndex;
+        return this.QUESTIONNAIRE.currentQuestionIndex;
     }
 
 

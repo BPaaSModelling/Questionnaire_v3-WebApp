@@ -94,14 +94,14 @@ export class  InsertCSService {
          this.csModel.label = csLabel;
          this.csModel.properties = this.csFields;
 
-let result: string ="";
+        let result: string = '';
         this.http.post(EndpointSettings.getAddCloudServiceEndpoint(), JSON.stringify(this.csModel))
             .map(response => response.json()).subscribe(
             data => {
-                result = "OK";
+                result = 'OK';
 
             }, error =>
-            result = "ERROR"
+            result = 'ERROR'
         );
 
         return result;
