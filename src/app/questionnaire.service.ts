@@ -152,6 +152,7 @@ export class QuestionnaireService {
         this.QUESTIONNAIRE.currentQuestionIndex--;
         this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
         this.QUESTIONNAIRE.completedQuestionList.splice(this.QUESTIONNAIRE.currentQuestionIndex+1,1);
+        this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.splice(1,1);
         console.log(this.QUESTIONNAIRE);
     }
 }
