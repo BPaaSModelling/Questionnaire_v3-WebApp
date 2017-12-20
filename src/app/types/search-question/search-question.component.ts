@@ -42,4 +42,8 @@ export class SearchQuestionComponent implements OnInit {
       this.qService.updateQuestionnaire();
   }
 
+    private previousQuestion(): void {
+        this.givenAnswer = new AnswerModel;
+        this.qService.showPreviousQuestion();
+    }
 }

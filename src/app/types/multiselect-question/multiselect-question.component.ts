@@ -41,4 +41,9 @@ export class MultiselectQuestionComponent implements OnInit {
     this.givenAnswer = [];
       this.qService.updateQuestionnaire();
   }
+
+    private previousQuestion(): void {
+        this.givenAnswer = [];
+        this.qService.showPreviousQuestion();
+    }
 }

@@ -38,5 +38,9 @@ export class ValueinsertQuestionComponent implements OnInit {
       this.comparisonAnswerCode = null;
       this.qService.updateQuestionnaire();
   }
-
+    private previousQuestion(): void {
+        this.answerValue = null;
+        this.comparisonAnswerCode = null;
+        this.qService.showPreviousQuestion();
+    }
 }

@@ -34,5 +34,8 @@ export class SingleselectionQuestionComponent implements OnInit {
     this.givenAnswer = null;
       this.qService.updateQuestionnaire();
   }
-
+    private previousQuestion(): void {
+        this.givenAnswer = null;
+        this.qService.showPreviousQuestion();
+    }
 }

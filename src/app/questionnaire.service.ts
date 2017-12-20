@@ -109,7 +109,6 @@ export class QuestionnaireService {
 
         if (this.setupPhase){
             this.QUESTIONNAIRE.selectedDomainList = this.initialDomains;
-            console.log("Update domains");
             this.setupPhase = false;
         }else{
             this.QUESTIONNAIRE.currentQuestionIndex++;
@@ -129,7 +128,6 @@ export class QuestionnaireService {
                     console.log(this.QUESTIONNAIRE);
                     this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
 
-
             }, error => {
                 console.log('Could not query next question');
                 this.QUESTIONNAIRE.completed = true;
@@ -140,13 +138,18 @@ export class QuestionnaireService {
 
     }
 
-    get getQuestionList(): QuestionModel[] {
+    getQuestionList(): QuestionModel[] {
         return this.QUESTIONNAIRE.completedQuestionList;
     }
 
-    get getQuestionIndex(): number {
+    getQuestionIndex(): number {
         return this.QUESTIONNAIRE.currentQuestionIndex;
     }
 
-
+    public showPreviousQuestion(): void {
+        this.QUESTIONNAIRE.currentQuestionIndex--;
+        this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
+        this.QUESTIONNAIRE.completedQuestionList.splice(this.QUESTIONNAIRE.currentQuestionIndex+1,1);
+        console.log(this.QUESTIONNAIRE);
+    }
 }

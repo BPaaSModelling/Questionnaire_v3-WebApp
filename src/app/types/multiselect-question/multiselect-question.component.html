@@ -7,5 +7,6 @@
   </div>
 </md-card-content>
 <md-card-actions>
+  <button *ngIf="qService.setupPhase == false && qService.QUESTIONNAIRE.currentQuestionIndex >= 1" md-raised-button md-button (click)="previousQuestion()">Back</button>
   <button md-raised-button md-button (click)="nextQuestion()" [disabled]="givenAnswer.length<=0" >Next</button>
 </md-card-actions>

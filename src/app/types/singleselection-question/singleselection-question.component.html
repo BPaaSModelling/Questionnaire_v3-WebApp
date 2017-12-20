@@ -10,6 +10,7 @@
 </md-radio-group>
 </md-card-content>
 <md-card-actions>
+  <button *ngIf="qService.setupPhase == false && qService.QUESTIONNAIRE.currentQuestionIndex >= 1" md-raised-button md-button (click)="previousQuestion()">Back</button>
   <button md-raised-button md-button (click)="nextQuestion()" [disabled]="givenAnswer==='' || givenAnswer==null" >Next</button>
 </md-card-actions>
 
