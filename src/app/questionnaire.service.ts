@@ -114,6 +114,8 @@ export class QuestionnaireService {
             this.QUESTIONNAIRE.currentQuestionIndex++;
         }
 
+        console.log("Ask for suitable services");
+        this.queryCloudServices();
         console.log("Ask for the next question");
 
 
