@@ -6,8 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { JsonpModule } from '@angular/http';
 
 import {
-  MdToolbarModule, MdButtonModule, MdCardModule, MdSidenavModule,
-  MdInputModule, MdRadioModule, MdListModule, MdCheckboxModule
+  MatToolbarModule, MatButtonModule, MatCardModule, MatSidenavModule,
+  MatInputModule, MatRadioModule, MatListModule, MatCheckboxModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -57,14 +57,14 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
-    MdToolbarModule,
-    MdButtonModule,
-    MdCardModule,
-    MdSidenavModule,
-    MdInputModule,
-    MdRadioModule,
-    MdListModule,
-    MdCheckboxModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatInputModule,
+    MatRadioModule,
+    MatListModule,
+    MatCheckboxModule,
     JsonpModule,
     ReactiveFormsModule
   ],

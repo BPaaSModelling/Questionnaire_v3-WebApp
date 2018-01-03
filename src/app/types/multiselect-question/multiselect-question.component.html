@@ -1,12 +1,12 @@
 
-<md-card-content>
+<mat-card-content>
   <div *ngFor="let aItem of qItem.answerList">
     <p>
-      <md-checkbox (click)="handleMultiSelect(aItem)">{{aItem.answerLabel}}</md-checkbox>
+      <mat-checkbox (click)="handleMultiSelect(aItem)">{{aItem.answerLabel}}</mat-checkbox>
     </p>
   </div>
-</md-card-content>
-<md-card-actions>
-  <button *ngIf="qService.setupPhase == false && qService.QUESTIONNAIRE.currentQuestionIndex >= 1" md-raised-button md-button (click)="previousQuestion()">Back</button>
-  <button md-raised-button md-button (click)="nextQuestion()" [disabled]="givenAnswer.length<=0" >Next</button>
-</md-card-actions>
+</mat-card-content>
+<mat-card-actions>
+  <button *ngIf="qService.setupPhase == false && qService.QUESTIONNAIRE.currentQuestionIndex >= 1" mat-raised-button mat-button (click)="previousQuestion()">Back</button>
+  <button mat-raised-button mat-button (click)="nextQuestion()" [disabled]="givenAnswer.length<=0" >Next</button>
+</mat-card-actions>

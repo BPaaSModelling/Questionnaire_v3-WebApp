@@ -1,7 +1,7 @@
-<md-card-content>
+<mat-card-content>
   <div *ngFor="let aItem of insertService.csFields[i].answerList">
     <p>
-      <md-checkbox (click)="handleMultiSelect(aItem.answerID, aItem.answerLabel)">{{aItem.answerLabel}}</md-checkbox>
+      <mat-checkbox (click)="handleMultiSelect(aItem.answerID, aItem.answerLabel)">{{aItem.answerLabel}}</mat-checkbox>
     </p>
   </div>
-</md-card-content>
+</mat-card-content>

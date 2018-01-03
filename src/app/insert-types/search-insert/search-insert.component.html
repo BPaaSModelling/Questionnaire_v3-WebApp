@@ -1,14 +1,14 @@
-<md-card-content>
-  <md-input-container>
+<mat-card-content>
+  <mat-input-container>
 
-    <input mdInput  placeholder="type to search"  (keyup)="search(insertService.csFields[i].givenAnswerList[0].answerLabel, i)" [(ngModel)]="insertService.csFields[i].givenAnswerList[0].answerLabel" required>
-  </md-input-container>
+    <input matInput  placeholder="type to search"  (keyup)="search(insertService.csFields[i].givenAnswerList[0].answerLabel, i)" [(ngModel)]="insertService.csFields[i].givenAnswerList[0].answerLabel" required>
+  </mat-input-container>
   <div *ngIf="(queriedIndex == i)" flex style="overflow: scroll; height: 400px; width: 500px;" >
 
-  <md-nav-list>
-    <md-list-item *ngFor="let item of (insertService.searchResults$ | async)">
-      <a md-line (click)="handleSearchSelect(item)">{{ item.label }}</a>
-    </md-list-item>
-  </md-nav-list>
+  <mat-nav-list>
+    <mat-list-item *ngFor="let item of (insertService.searchResults$ | async)">
+      <a mat-line (click)="handleSearchSelect(item)">{{ item.label }}</a>
+    </mat-list-item>
+  </mat-nav-list>
    </div>
-</md-card-content>
+</mat-card-content>

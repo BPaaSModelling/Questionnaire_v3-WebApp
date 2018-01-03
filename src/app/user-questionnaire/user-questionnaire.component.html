@@ -1,10 +1,10 @@
-<md-sidenav-container fullscreen>
-  <md-toolbar color="default">
-    <button md-raised-button (click)="startNewQuestionnaire()">Start New Questionnaire</button>
+<mat-sidenav-container fullscreen>
+  <mat-toolbar color="default">
+    <button mat-raised-button (click)="startNewQuestionnaire()">Start New Questionnaire</button>
     <span class="example-fill-remaining-space"></span>
-  </md-toolbar>
+  </mat-toolbar>
 
-  <md-sidenav-container class="example-container">
+  <mat-sidenav-container class="example-container">
     <div *ngIf="(!qService.QUESTIONNAIRE.completed); then thenBlock else elseBlock"></div>
 
     <ng-template #thenBlock>
@@ -15,23 +15,23 @@
     </ng-template>
 
     <ng-template #elseBlock>
-      <md-card class="example-card">
-        <md-card-header>
-          <md-card-title>Questionnaire Completed</md-card-title>
-          <md-card-subtitle>Cloud Services based on the answered questions:</md-card-subtitle>
-        </md-card-header>
-        <md-card-content>
-          <md-list>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Questionnaire Completed</mat-card-title>
+          <mat-card-subtitle>Cloud Services based on the answered questions:</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
             <div *ngFor="let service of (qService.suitableCloudService$ | async)">
-              <md-list-item>
+              <mat-list-item>
                 {{service.answerLabel}}
-              </md-list-item>
-              <md-divider></md-divider>
+              </mat-list-item>
+              <mat-divider></mat-divider>
             </div>
-          </md-list>
-        </md-card-content>
-      </md-card>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
     </ng-template>
 
-  </md-sidenav-container>
-</md-sidenav-container>
+  </mat-sidenav-container>
+</mat-sidenav-container>

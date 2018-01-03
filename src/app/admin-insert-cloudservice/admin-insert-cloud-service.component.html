@@ -1,30 +1,30 @@
-<md-sidenav-container fullscreen>
+<mat-sidenav-container fullscreen>
     <h2>Insert a new Cloud Service</h2>
     <br />
 
     <!-- Here i insert a static domain (general) -->
-        <md-card-header>
-            <div align="center"><md-card-title>{{specific_domain}}</md-card-title></div>
+        <mat-card-header>
+            <div align="center"><mat-card-title>{{specific_domain}}</mat-card-title></div>
 
-                    <md-list>
+                    <mat-list>
                         <!-- Here i insert a static field (the name of the cloudservice) -->
-                        <md-card-content>
-                            <md-list>
+                        <mat-card-content>
+                            <mat-list>
                                 <ul>
-                                    <md-list-item><b><li>Name of the new Cloud Service:</li></b></md-list-item>
-                                    <md-input-container>
-                                        <input mdInput placeholder="Insert the name of the Cloud Service" value="" [(ngModel)]="csLabel" required>
-                                    </md-input-container>
+                                    <mat-list-item><b><li>Name of the new Cloud Service:</li></b></mat-list-item>
+                                    <mat-input-container>
+                                        <input matInput placeholder="Insert the name of the Cloud Service" value="" [(ngModel)]="csLabel" required>
+                                    </mat-input-container>
                                 </ul>
-                            </md-list>
-                        </md-card-content>
+                            </mat-list>
+                        </mat-card-content>
 
                         <!-- Here I iterate all the elements and i print out the ones with "General" domain -->
                         <div *ngFor="let element of (insertService.csField$ | async); let i = index" [attr.data-index]="i">
 
                             <ul>
                                 <div *ngIf="(element.domain == specific_domain); then thenBlock"></div>
-                                <ng-template #thenBlock><md-list-item><b><li>{{element.propertyLabel}}</li></b>: </md-list-item>
+                                <ng-template #thenBlock><mat-list-item><b><li>{{element.propertyLabel}}</li></b>: </mat-list-item>
 
                                     <app-search-insert *ngIf="element.typeOfAnswer == insertService.variables.getSearchURI()" [i]="i" [insertService]="insertService" [propertyLabel]="element.propertyLabel"></app-search-insert>
 
@@ -37,8 +37,8 @@
                                 </ng-template>
                             </ul>
                         </div><!-- End elements iteration) -->
-                    </md-list>
-        </md-card-header>
+                    </mat-list>
+        </mat-card-header>
 
 
     <hr />
@@ -50,17 +50,17 @@
     <!-- Here I iterate all the domains (categories of fields) and I exlude the domain "General" -->
     <div *ngFor="let domain of (insertService.domain$ | async)">
         <div *ngIf="domain != specific_domain">
-        <md-card-header>
-            <div align="center"><md-card-title>{{domain}}</md-card-title></div>
-        </md-card-header>
-        <md-card-content>
-            <md-list>
+        <mat-card-header>
+            <div align="center"><mat-card-title>{{domain}}</mat-card-title></div>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list>
                 <!-- Here I iterate all the elements (fields of cloudservice) -->
                 <div *ngFor="let element of (insertService.csField$ | async); let i = index" [attr.data-index]="i">
 
                     <ul>
                         <div *ngIf="(domain == element.domain); then thenBlock"></div>
-                        <ng-template #thenBlock><md-list-item><b><li>{{element.propertyLabel}}</li></b>: </md-list-item>
+                        <ng-template #thenBlock><mat-list-item><b><li>{{element.propertyLabel}}</li></b>: </mat-list-item>
 
                             <app-search-insert *ngIf="element.typeOfAnswer == insertService.variables.getSearchURI() "[i]="i" [insertService]="insertService" [propertyLabel]="element.propertyLabel">{{i}}</app-search-insert>
 
@@ -73,16 +73,16 @@
                         </ng-template>
                     </ul>
                 </div><!-- End elements iteration) -->
-            </md-list>
-        </md-card-content>
+            </mat-list>
+        </mat-card-content>
         <br />
         <hr />
         </div><!-- End if domain is not "General" -->
     </div><!-- End domains iteration -->
     <br />
     <br />
-    <md-card-actions>
-        <div align="center"><button md-raised-button (click)="createCS()">Create new Cloud Service</button></div>
-    </md-card-actions>
+    <mat-card-actions>
+        <div align="center"><button mat-raised-button (click)="createCS()">Create new Cloud Service</button></div>
+    </mat-card-actions>
     <br />
-</md-sidenav-container>
+</mat-sidenav-container>

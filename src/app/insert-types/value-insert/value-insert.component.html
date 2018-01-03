@@ -1,25 +1,25 @@
-<md-card-content>
+<mat-card-content>
 
-  <md-input-container>
+  <mat-input-container>
     <div *ngIf="insertService.csFields[i].answerDatatype == insertService.variables.getNumericDatatypeURI(); then numericBlock else stringBlock"></div>
     <ng-template #numericBlock>
-    <input mdInput placeholder="Insert your number here" value="" [(ngModel)]="answerValue" (keyup)="handleOperationsSingleSelect(answerValue)" type="number" required >
+    <input matInput placeholder="Insert your number here" value="" [(ngModel)]="answerValue" (keyup)="handleOperationsSingleSelect(answerValue)" type="number" required >
     </ng-template>
     <ng-template #stringBlock>
-      <input mdInput placeholder="Insert your value here" value="" [(ngModel)]="answerValue" (keyup)="handleOperationsSingleSelect(answerValue)" required >
+      <input matInput placeholder="Insert your value here" value="" [(ngModel)]="answerValue" (keyup)="handleOperationsSingleSelect(answerValue)" required >
     </ng-template>
 
-  </md-input-container>
+  </mat-input-container>
 
   <!--<p>Please select the comparison<br>operation of your entered value.</p>
-  <p><md-radio-group class="radio-group">
+  <p><mat-radio-group class="radio-group">
     <div *ngFor="let cItem of element.comparisonOperationAnswer">
-      <md-radio-button class="radio-button"
+      <mat-radio-button class="radio-button"
                        [value]="cItem.answerID"
                        (click)="handleOperationsSingleSelect(cItem.answerID)">
         {{cItem.answerLabel}}
-      </md-radio-button>
+      </mat-radio-button>
     </div>
-  </md-radio-group>
+  </mat-radio-group>
   </p><!-->
-</md-card-content>
+</mat-card-content>

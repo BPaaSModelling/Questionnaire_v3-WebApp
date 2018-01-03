@@ -1,15 +1,15 @@
-<md-card-content>
-<md-input-container>
-    <input mdInput placeholder="search" (keyup)="search(givenAnswer.answerLabel)" [(ngModel)]="givenAnswer.answerLabel" required>
-  </md-input-container>
-  <md-nav-list>
-    <md-list-item *ngFor="let item of (qService.searchResults$ | async)">
-      <a md-line (click)="handleSearchSelect(item)">{{ item.label }}</a>
-    </md-list-item>
-  </md-nav-list>
+<mat-card-content>
+<mat-input-container>
+    <input matInput placeholder="search" (keyup)="search(givenAnswer.answerLabel)" [(ngModel)]="givenAnswer.answerLabel" required>
+  </mat-input-container>
+  <mat-nav-list>
+    <mat-list-item *ngFor="let item of (qService.searchResults$ | async)">
+      <a mat-line (click)="handleSearchSelect(item)">{{ item.label }}</a>
+    </mat-list-item>
+  </mat-nav-list>
 
-  </md-card-content>
-  <md-card-actions>
-    <button *ngIf="qService.setupPhase == false && qService.QUESTIONNAIRE.currentQuestionIndex >= 1" md-raised-button md-button (click)="previousQuestion()">Back</button>
-    <button md-raised-button md-button (click)="nextQuestion()" [disabled]="givenAnswer==='' || givenAnswer==null" >Next</button>
-  </md-card-actions>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="qService.setupPhase == false && qService.QUESTIONNAIRE.currentQuestionIndex >= 1" mat-raised-button mat-button (click)="previousQuestion()">Back</button>
+    <button mat-raised-button mat-button (click)="nextQuestion()" [disabled]="givenAnswer==='' || givenAnswer==null" >Next</button>
+  </mat-card-actions>
