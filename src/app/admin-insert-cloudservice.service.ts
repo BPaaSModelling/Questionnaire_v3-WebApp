@@ -62,7 +62,7 @@ export class  InsertCSService {
 
     public search(ns: string, term: string, classes: boolean) {
 
-        console.log("search received: " + ns +" :: " + term + " :: " + classes);
+        //console.log("search received: " + ns +" :: " + term + " :: " + classes);
 
         let search: URLSearchParams = new URLSearchParams();
         search.set('ns', ns);

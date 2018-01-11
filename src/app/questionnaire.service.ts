@@ -74,7 +74,7 @@ export class QuestionnaireService {
 
     public search(ns: string, term: string, classes: boolean) {
 
-    console.log("search received: " +ns +" :: " + term + " :: " + classes);
+    //console.log("search received: " +ns +" :: " + term + " :: " + classes);
     let search = new URLSearchParams()
     search.set('ns', ns);
     search.set('search', term);
@@ -84,7 +84,7 @@ export class QuestionnaireService {
       .map(response => response.json()).subscribe(
       data => {
 
-        console.log("searchResults " +JSON.stringify(data));
+        //console.log("searchResults " +JSON.stringify(data));
         this.searchResults$ = Observable.of(data);
 
 
