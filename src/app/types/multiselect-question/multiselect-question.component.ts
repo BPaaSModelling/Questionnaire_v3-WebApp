@@ -34,7 +34,8 @@ export class MultiselectQuestionComponent implements OnInit {
 
   private nextQuestion(): void {
     if (this.qService.domainPhase) {
-        this.qService.initialDomains = this.givenAnswer;
+        this.qService.QUESTIONNAIRE.selectedDomainList = this.givenAnswer;
+        console.log("----GIVEN ANSWER LIST: " + this.givenAnswer)
     } else {
       this.qService.QUESTIONNAIRE.completedQuestionList[this.qService.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList = this.givenAnswer;
     }

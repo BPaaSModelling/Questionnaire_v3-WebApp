@@ -111,19 +111,34 @@ export class QuestionnaireService {
     }
 
     public updateQuestionnaire(): void{
+        console.log("===========" + this.domainPhase)
 
+        if (this.QUESTIONNAIRE.completedQuestionList.length === 3 ){
+            this.domainPhase = true;
+        }
 
         if (this.domainPhase){
             console.log("Ask for the domain question");
-            this.QUESTIONNAIRE.selectedDomainList = this.initialDomains;
+            //this.QUESTIONNAIRE.selectedDomainList = this.initialDomains;
             this.domainPhase = false;
             var question_of_domains: QuestionModel = new QuestionModel();
+            question_of_domains.questionURI = "SKIP"
             question_of_domains.questionLabel = "Please, select the domain(s) of the questions";
             question_of_domains.answerList = this.initialDomains;
             question_of_domains.answerType = "http://ikm-group.ch/archiMEO/questionnaire#MultiSelection";
             question_of_domains.domainLabel = "Introduction";
             question_of_domains.questionID = -1;
+            let skippedAnswers: AnswerModel[] = [];
+            let skippedAnswer: AnswerModel = new AnswerModel;
+            skippedAnswer.answerLabel="SKIP";
+            skippedAnswer.answerID="SKIP";
+            skippedAnswers.push(skippedAnswer);
+            question_of_domains.annotationRelation = "SKIP";
+            question_of_domains.givenAnswerList = skippedAnswers;
+
+
             //this._questionList.push(question_of_domains);
+            this.QUESTIONNAIRE.completedQuestionList.push(question_of_domains);
             this.questionBehaviour.next( question_of_domains);
         }else {
 
@@ -152,9 +167,7 @@ export class QuestionnaireService {
         this.queryCloudServices();
         //console.log(this.QUESTIONNAIRE);
 
-        if (this.QUESTIONNAIRE.completedQuestionList.length === 2 ){
-            this.domainPhase = true;
-        }
+
     }
 
     getQuestionList(): QuestionModel[] {
