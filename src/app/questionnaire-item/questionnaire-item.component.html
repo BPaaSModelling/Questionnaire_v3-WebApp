@@ -1,6 +1,6 @@
 <div>
   <mat-card>
-  <mat-card-subtitle *ngIf="!qService.setupPhase">Question #{{qService.QUESTIONNAIRE.currentQuestionIndex+1}}</mat-card-subtitle>
+  <mat-card-subtitle *ngIf="!qService.domainPhase">Question #{{qService.QUESTIONNAIRE.currentQuestionIndex+1}}</mat-card-subtitle>
   <mat-card-subtitle>Category: {{qItem.domainLabel}}</mat-card-subtitle>
   <mat-card-title>{{qItem.questionLabel}}</mat-card-title>
 

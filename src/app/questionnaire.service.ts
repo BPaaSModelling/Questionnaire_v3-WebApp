@@ -24,12 +24,28 @@ export class QuestionnaireService {
   private options: RequestOptions;
   searchResults$: Observable<SearchResultModel[]> = Observable.of(null);
   suitableCloudService$: Observable<AnswerModel[]> = Observable.of(null);
+  private question_of_domains: QuestionModel = new QuestionModel;
 
   constructor(
     private http: Http,
     private jsonp: Jsonp) {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     this.options = new RequestOptions({ headers: headers });
+
+      this.question_of_domains.questionURI = "SKIP"
+      this.question_of_domains.questionLabel = "Please, select the domain(s) of the questions";
+      this.question_of_domains.answerList = this.initialDomains;
+      this.question_of_domains.answerType = "http://ikm-group.ch/archiMEO/questionnaire#MultiSelection";
+      this.question_of_domains.domainLabel = "Introduction";
+      this.question_of_domains.questionID = 3.5;
+      let skippedAnswers: AnswerModel[] = [];
+      let skippedAnswer: AnswerModel = new AnswerModel;
+      skippedAnswer.answerLabel="SKIP";
+      skippedAnswer.answerID="SKIP";
+      skippedAnswers.push(skippedAnswer);
+      this.question_of_domains.annotationRelation = "SKIP";
+      this.question_of_domains.givenAnswerList = skippedAnswers;
+
   }
 
 
@@ -52,7 +68,9 @@ export class QuestionnaireService {
                         this.initialDomains.push(data[i]);
                     }
                 }
+
                 console.log('Elements parsing with success!');
+                this.question_of_domains.answerList = this.initialDomains;
 
             }, error => console.log('Could not query cloudservice fields'));
 
@@ -63,11 +81,13 @@ export class QuestionnaireService {
             .map(response => response.json()).subscribe(
             data => {
 
-                console.log("Results from querying next question: " + JSON.stringify(data));
+                //console.log("Results from querying next question: " + JSON.stringify(data));
 
                 this.QUESTIONNAIRE.completedQuestionList.push(data);
                 console.log(this.QUESTIONNAIRE);
                 this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
+                this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].questionID = this.QUESTIONNAIRE.currentQuestionIndex;
+
 
             }, error => {
                 console.log('Could not query next question');
@@ -111,37 +131,22 @@ export class QuestionnaireService {
     }
 
     public updateQuestionnaire(): void{
-        console.log("===========" + this.domainPhase)
+        console.log(this.QUESTIONNAIRE);
+        console.log(this.QUESTIONNAIRE.currentQuestionIndex);
 
-        if (this.QUESTIONNAIRE.completedQuestionList.length === 3 ){
-            this.domainPhase = true;
-        }
 
-        if (this.domainPhase){
+        if (this.QUESTIONNAIRE.completedQuestionList.length == 3 && !this.domainPhase){
             console.log("Ask for the domain question");
             //this.QUESTIONNAIRE.selectedDomainList = this.initialDomains;
-            this.domainPhase = false;
-            var question_of_domains: QuestionModel = new QuestionModel();
-            question_of_domains.questionURI = "SKIP"
-            question_of_domains.questionLabel = "Please, select the domain(s) of the questions";
-            question_of_domains.answerList = this.initialDomains;
-            question_of_domains.answerType = "http://ikm-group.ch/archiMEO/questionnaire#MultiSelection";
-            question_of_domains.domainLabel = "Introduction";
-            question_of_domains.questionID = -1;
-            let skippedAnswers: AnswerModel[] = [];
-            let skippedAnswer: AnswerModel = new AnswerModel;
-            skippedAnswer.answerLabel="SKIP";
-            skippedAnswer.answerID="SKIP";
-            skippedAnswers.push(skippedAnswer);
-            question_of_domains.annotationRelation = "SKIP";
-            question_of_domains.givenAnswerList = skippedAnswers;
+            this.domainPhase = true;
+
 
 
             //this._questionList.push(question_of_domains);
-            this.QUESTIONNAIRE.completedQuestionList.push(question_of_domains);
-            this.questionBehaviour.next( question_of_domains);
+           // this.QUESTIONNAIRE.completedQuestionList.push(question_of_domains);
+            this.questionBehaviour.next( this.question_of_domains);
         }else {
-
+            this.domainPhase = false;
             this.QUESTIONNAIRE.currentQuestionIndex++;
 
             console.log("Ask for the next question");
@@ -156,6 +161,7 @@ export class QuestionnaireService {
                     this.QUESTIONNAIRE.completedQuestionList.push(data);
                     console.log(this.QUESTIONNAIRE);
                     this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
+                    this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].questionID = this.QUESTIONNAIRE.currentQuestionIndex;
 
                 }, error => {
                     console.log('Could not query next question');
@@ -166,7 +172,6 @@ export class QuestionnaireService {
         console.log("Ask for suitable services");
         this.queryCloudServices();
         //console.log(this.QUESTIONNAIRE);
-
 
     }
 
@@ -179,10 +184,24 @@ export class QuestionnaireService {
     }
 
     public showPreviousQuestion(): void {
+
+        if (this.QUESTIONNAIRE.currentQuestionIndex == 2 && this.domainPhase){
+
+            this.domainPhase = false;
+            this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
+            this.QUESTIONNAIRE.selectedDomainList = [];
+        } else if (this.QUESTIONNAIRE.currentQuestionIndex == 3 && !this.domainPhase) {
+            this.domainPhase = true;
+            this.questionBehaviour.next(this.question_of_domains);
+            this.QUESTIONNAIRE.currentQuestionIndex--;
+            this.QUESTIONNAIRE.completedQuestionList.splice(this.QUESTIONNAIRE.currentQuestionIndex+1,1);
+            this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.splice(1,1);
+        }else{
         this.QUESTIONNAIRE.currentQuestionIndex--;
         this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
         this.QUESTIONNAIRE.completedQuestionList.splice(this.QUESTIONNAIRE.currentQuestionIndex+1,1);
         this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.splice(1,1);
         console.log(this.QUESTIONNAIRE);
+        }
     }
 }

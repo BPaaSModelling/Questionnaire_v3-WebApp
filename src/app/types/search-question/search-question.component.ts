@@ -23,7 +23,7 @@ export class SearchQuestionComponent implements OnInit {
 
   private search(term): void {
     let a = this.qService.search(this.qItem.searchNamespace, term, this.qItem.searchOnClassesInsteadOfInstances);
-    console.log("%%%%% " + JSON.stringify(a));
+   // console.log("%%%%% " + JSON.stringify(a));
   }
 
   private handleSearchSelect(item): void {
