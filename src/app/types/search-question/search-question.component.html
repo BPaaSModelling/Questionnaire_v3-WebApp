@@ -10,6 +10,6 @@
 
   </mat-card-content>
   <mat-card-actions>
-    <button *ngIf="qService.setupPhase == false && qService.QUESTIONNAIRE.currentQuestionIndex >= 1" mat-raised-button mat-button (click)="previousQuestion()">Back</button>
+    <button *ngIf="qService.domainPhase == false && qService.QUESTIONNAIRE.currentQuestionIndex >= 1" mat-raised-button mat-button (click)="previousQuestion()">Back</button>
     <button mat-raised-button mat-button (click)="nextQuestion()" [disabled]="givenAnswer==='' || givenAnswer==null" >Next</button>
   </mat-card-actions>
