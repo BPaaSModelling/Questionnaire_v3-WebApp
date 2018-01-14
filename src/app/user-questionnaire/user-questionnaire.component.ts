@@ -8,27 +8,28 @@ import {QuestionModel} from '../_models/question.model';
   styleUrls: ['./user-questionnaire.component.css']
 })
 export class UserQuestionnaireComponent implements OnInit {
-  private question: QuestionModel;
+    private question: QuestionModel;
 
-  constructor(private qService: QuestionnaireService) {
-    this.qService.setupNewQuestionnaire();
+    constructor(private qService: QuestionnaireService) {
+        this.qService.setupNewQuestionnaire();
 
-    this.qService.askForDomainQuestion.subscribe(
-        data => {
-          this.question = data;
-        });
-    // this.qItem = qService.selectedQItem();
-  }
+        this.qService.listenForQuestions.subscribe(
+            data => {
+                this.question = data;
+            });
+        // this.qItem = qService.selectedQItem();
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  private startNewQuestionnaire(): void {
-    console.log('start New Questionnaire');
-    this.qService.setupNewQuestionnaire();
-      this.qService.askForDomainQuestion.subscribe(
-          data => {
-              this.question = data;
-          });
-  }
+    private startNewQuestionnaire(): void {
+        console.log('start New Questionnaire');
+        this.qService.setupNewQuestionnaire();
+        this.qService.listenForQuestions.subscribe(
+            data => {
+                this.question = data;
+            });
+
+    }
 }

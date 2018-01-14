@@ -19,7 +19,7 @@ export class QuestionnaireService {
 
   public QUESTIONNAIRE: QuestionnaireModel;
   public initialDomains: AnswerModel[] = [];
-  public setupPhase: boolean;
+  public domainPhase: boolean;
   private questionBehaviour:BehaviorSubject<QuestionModel> = new BehaviorSubject(new QuestionModel());
   private options: RequestOptions;
   searchResults$: Observable<SearchResultModel[]> = Observable.of(null);
@@ -35,7 +35,7 @@ export class QuestionnaireService {
 
     public setupNewQuestionnaire() {
       this.QUESTIONNAIRE = new QuestionnaireModel();
-      this.setupPhase = true;
+      this.domainPhase = false;
       this.initialDomains = [];
         this.queryDomains();
         this.suitableCloudService$ = Observable.of(null);
@@ -58,17 +58,23 @@ export class QuestionnaireService {
 
     }
 
-    public get askForDomainQuestion() {
+    public get listenForQuestions(){
+        this.http.post(EndpointSettings.getNextQuestionEndpoint(), this.QUESTIONNAIRE)
+            .map(response => response.json()).subscribe(
+            data => {
 
-        var question_of_domains: QuestionModel = new QuestionModel();
-        question_of_domains.questionLabel = "Please, select the domain(s) of the questions";
-        question_of_domains.answerList = this.initialDomains;
-        question_of_domains.answerType = "http://ikm-group.ch/archiMEO/questionnaire#MultiSelection";
-        question_of_domains.domainLabel = "Introduction";
-        question_of_domains.questionID = -1;
-        //this._questionList.push(question_of_domains);
-          this.questionBehaviour.next( question_of_domains);
-          return this.questionBehaviour.asObservable();
+                console.log("Results from querying next question: " + JSON.stringify(data));
+
+                this.QUESTIONNAIRE.completedQuestionList.push(data);
+                console.log(this.QUESTIONNAIRE);
+                this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
+
+            }, error => {
+                console.log('Could not query next question');
+                this.QUESTIONNAIRE.completed = true;
+            });
+
+        return this.questionBehaviour.asObservable();
 
     }
 
@@ -107,37 +113,48 @@ export class QuestionnaireService {
     public updateQuestionnaire(): void{
 
 
-        if (this.setupPhase){
+        if (this.domainPhase){
+            console.log("Ask for the domain question");
             this.QUESTIONNAIRE.selectedDomainList = this.initialDomains;
-            this.setupPhase = false;
-        }else{
+            this.domainPhase = false;
+            var question_of_domains: QuestionModel = new QuestionModel();
+            question_of_domains.questionLabel = "Please, select the domain(s) of the questions";
+            question_of_domains.answerList = this.initialDomains;
+            question_of_domains.answerType = "http://ikm-group.ch/archiMEO/questionnaire#MultiSelection";
+            question_of_domains.domainLabel = "Introduction";
+            question_of_domains.questionID = -1;
+            //this._questionList.push(question_of_domains);
+            this.questionBehaviour.next( question_of_domains);
+        }else {
+
             this.QUESTIONNAIRE.currentQuestionIndex++;
-        }
 
-        console.log("Ask for suitable services");
-        this.queryCloudServices();
-        console.log("Ask for the next question");
+            console.log("Ask for the next question");
 
 
+            this.http.post(EndpointSettings.getNextQuestionEndpoint(), this.QUESTIONNAIRE)
+                .map(response => response.json()).subscribe(
+                data => {
 
-        this.http.post(EndpointSettings.getNextQuestionEndpoint(), this.QUESTIONNAIRE)
-            .map(response => response.json()).subscribe(
-            data => {
-
-                console.log("Results from querying next question: " +JSON.stringify(data));
+                    console.log("Results from querying next question: " + JSON.stringify(data));
 
                     this.QUESTIONNAIRE.completedQuestionList.push(data);
                     console.log(this.QUESTIONNAIRE);
                     this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
 
-            }, error => {
-                console.log('Could not query next question');
-                this.QUESTIONNAIRE.completed = true;
-            });
+                }, error => {
+                    console.log('Could not query next question');
+                    this.QUESTIONNAIRE.completed = true;
+                });
 
-
+        }
+        console.log("Ask for suitable services");
+        this.queryCloudServices();
         //console.log(this.QUESTIONNAIRE);
 
+        if (this.QUESTIONNAIRE.completedQuestionList.length === 2 ){
+            this.domainPhase = true;
+        }
     }
 
     getQuestionList(): QuestionModel[] {
