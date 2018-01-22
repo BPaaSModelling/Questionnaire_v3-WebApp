@@ -1,6 +1,6 @@
 import { SemanticAnnotationQuestionnaireWebAppPage } from './app.po';
 
-describe('semantic-annotation-questionnaire-web-app App', () => {
+describe('Questionnaire_v3-WebApp App', () => {
   let page: SemanticAnnotationQuestionnaireWebAppPage;
 
   beforeEach(() => {

@@ -20,7 +20,7 @@ export class QuestionnaireService {
   public QUESTIONNAIRE: QuestionnaireModel;
   public initialDomains: AnswerModel[] = [];
   public domainPhase: boolean;
-  private questionBehaviour:BehaviorSubject<QuestionModel> = new BehaviorSubject(new QuestionModel());
+  private questionBehaviour: BehaviorSubject <QuestionModel> = new BehaviorSubject(new QuestionModel());
   private options: RequestOptions;
   searchResults$: Observable<SearchResultModel[]> = Observable.of(null);
   suitableCloudService$: Observable<AnswerModel[]> = Observable.of(null);
@@ -32,7 +32,7 @@ export class QuestionnaireService {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     this.options = new RequestOptions({ headers: headers });
 
-      this.question_of_domains.questionURI = "SKIP"
+      this.question_of_domains.questionURI = "SKIP";
       this.question_of_domains.questionLabel = "Please, select the domain(s) of the questions";
       this.question_of_domains.answerList = this.initialDomains;
       this.question_of_domains.answerType = "http://ikm-group.ch/archiMEO/questionnaire#MultiSelection";
