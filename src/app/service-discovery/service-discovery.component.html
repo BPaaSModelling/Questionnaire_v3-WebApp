@@ -1,5 +1,5 @@
 <mat-sidenav #sidenav opened="true" align="end">
-  <h3 *ngIf="qService.currentNumberOfSuitableCS > qService.previousNumberOfSuitableCS">{{qService.currentNumberOfSuitableCS}} Services discovered <font color="red">(+{{qService.currentNumberOfSuitableCS - qService.previousNumberOfSuitableCS}})</font></h3>
+  <h3 *ngIf="qService.currentNumberOfSuitableCS >= qService.previousNumberOfSuitableCS">{{qService.currentNumberOfSuitableCS}} Services discovered <font color="red">(+{{qService.currentNumberOfSuitableCS - qService.previousNumberOfSuitableCS}})</font></h3>
   <h3 *ngIf="qService.currentNumberOfSuitableCS < qService.previousNumberOfSuitableCS">{{qService.currentNumberOfSuitableCS}} Services discovered <font color="green">({{qService.currentNumberOfSuitableCS - qService.previousNumberOfSuitableCS}})</font></h3>
 
   <mat-list>
