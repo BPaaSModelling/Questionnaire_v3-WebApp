@@ -21,9 +21,12 @@ export class QuestionnaireService {
   public initialDomains: AnswerModel[] = [];
   public domainPhase: boolean;
   private questionBehaviour: BehaviorSubject <QuestionModel> = new BehaviorSubject(new QuestionModel());
+  private : BehaviorSubject <number>;
   private options: RequestOptions;
   searchResults$: Observable<SearchResultModel[]> = Observable.of(null);
   suitableCloudService$: Observable<AnswerModel[]> = Observable.of(null);
+    currentNumberOfSuitableCS: number;
+    previousNumberOfSuitableCS: number;
   private question_of_domains: QuestionModel = new QuestionModel;
 
   constructor(
@@ -45,6 +48,7 @@ export class QuestionnaireService {
       skippedAnswers.push(skippedAnswer);
       this.question_of_domains.annotationRelation = "SKIP";
       this.question_of_domains.givenAnswerList = skippedAnswers;
+      this.currentNumberOfSuitableCS = 0;
 
   }
 
@@ -55,6 +59,7 @@ export class QuestionnaireService {
       this.initialDomains = [];
         this.queryDomains();
         this.suitableCloudService$ = Observable.of(null);
+        this.queryCloudServices();
     }
 
     private queryDomains(): void {
@@ -127,7 +132,13 @@ export class QuestionnaireService {
                 console.log("Results from querying suitable cloud services: " +JSON.stringify(data));
                 this.suitableCloudService$ = Observable.of(data);
 
+                console.log(data.length);
+                this.previousNumberOfSuitableCS = this.currentNumberOfSuitableCS;
+                this.currentNumberOfSuitableCS = data.length;
+
             }, error => console.log('Could not query services'));
+
+
     }
 
     public updateQuestionnaire(): void{
@@ -196,12 +207,16 @@ export class QuestionnaireService {
             this.QUESTIONNAIRE.currentQuestionIndex--;
             this.QUESTIONNAIRE.completedQuestionList.splice(this.QUESTIONNAIRE.currentQuestionIndex+1,1);
             this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.splice(1,1);
-        }else{
-        this.QUESTIONNAIRE.currentQuestionIndex--;
-        this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
-        this.QUESTIONNAIRE.completedQuestionList.splice(this.QUESTIONNAIRE.currentQuestionIndex+1,1);
-        this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.splice(1,1);
-        console.log(this.QUESTIONNAIRE);
+        }else {
+            this.QUESTIONNAIRE.currentQuestionIndex--;
+            this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
+            this.QUESTIONNAIRE.completedQuestionList.splice(this.QUESTIONNAIRE.currentQuestionIndex + 1, 1);
+            console.log("Current question index: " + this.QUESTIONNAIRE.currentQuestionIndex);
+
+            this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.splice(0, 1);
+            console.log(this.QUESTIONNAIRE);
         }
+
+        this.queryCloudServices();
     }
 }
