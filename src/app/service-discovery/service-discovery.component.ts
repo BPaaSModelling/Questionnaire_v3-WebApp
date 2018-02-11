@@ -13,8 +13,7 @@ import {fadeInDown, flash, flipInY, slideInDown} from "ng-animate/lib";
   styleUrls: ['./service-discovery.component.css'],
   // providers: [QuestionnaireService]
     animations: [
-        trigger('entrance_difference', [transition('* => *', useAnimation(flash))]),
-        trigger('entrance_cs', [transition('* => *', useAnimation(slideInDown))])
+        trigger('entrance_difference', [transition('* => *', useAnimation(flash))])
     ],
 })
 export class ServiceDiscoveryComponent implements OnInit, OnChanges {
