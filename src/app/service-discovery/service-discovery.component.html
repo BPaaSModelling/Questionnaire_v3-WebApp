@@ -1,8 +1,8 @@
 <mat-sidenav #sidenav opened="true" align="end">
-  <h3 *ngIf="qService.currentNumberOfSuitableCS >= qService.previousNumberOfSuitableCS">{{qService.currentNumberOfSuitableCS}} Services discovered <font color="red">(+{{qService.currentNumberOfSuitableCS - qService.previousNumberOfSuitableCS}})</font></h3>
-  <h3 *ngIf="qService.currentNumberOfSuitableCS < qService.previousNumberOfSuitableCS">{{qService.currentNumberOfSuitableCS}} Services discovered <font color="green">({{qService.currentNumberOfSuitableCS - qService.previousNumberOfSuitableCS}})</font></h3>
+  <h3 *ngIf="qService.currentNumberOfSuitableCS >= qService.previousNumberOfSuitableCS">{{qService.currentNumberOfSuitableCS}} Services discovered <font [@entrance_difference]="{ value: ent, params: { timing: 1.5}}" color="red">(+{{qService.currentNumberOfSuitableCS - qService.previousNumberOfSuitableCS}})</font></h3>
+  <h3 *ngIf="qService.currentNumberOfSuitableCS < qService.previousNumberOfSuitableCS">{{qService.currentNumberOfSuitableCS}} Services discovered <font [@entrance_difference]="{ value: ent, params: { timing: 1.5}}" color="green">({{qService.currentNumberOfSuitableCS - qService.previousNumberOfSuitableCS}})</font></h3>
 
-  <mat-list>
+  <mat-list [@entrance_cs]="{ value: ent, params: { timing: 1.5}}">
   <div *ngFor="let service of (qService.suitableCloudService$ | async)">
   <mat-list-item>
     {{service.answerLabel}}

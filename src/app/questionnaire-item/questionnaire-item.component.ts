@@ -11,16 +11,22 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {SearchResultModel} from "../_models/searchresult.model";
+import {transition, trigger, useAnimation} from "@angular/animations";
+import {bounce, fadeInDown, flip, flipInY, lightSpeedIn} from "ng-animate/lib";
 
 @Component({
   selector: 'questionnaire-item',
   templateUrl: './questionnaire-item.component.html',
   styleUrls: ['./questionnaire-item.component.css'],
+    animations: [
+        trigger('entrance_title', [transition('* => *', useAnimation(flip))]),
+        trigger('entrance_options', [transition('* => *', useAnimation(lightSpeedIn))])
+    ],
 
 })
 export class QuestionnaireItemComponent implements OnInit, OnChanges {
   @Input() qItem: QuestionModel;
-
+  ent: boolean = false;
   private SINGLESELECTION     : string = 'http://ikm-group.ch/archiMEO/questionnaire#SingleSelection';
   private SEARCHSELECTION  : string = 'http://ikm-group.ch/archiMEO/questionnaire#SearchSelection';
   private VALUEINSERT         : string = 'http://ikm-group.ch/archiMEO/questionnaire#ValueInsert';
@@ -29,10 +35,15 @@ export class QuestionnaireItemComponent implements OnInit, OnChanges {
   constructor(private qService: QuestionnaireService) {
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
   }
 
-  ngOnChanges():void{
+  ngOnChanges(): void{
+    if (this.ent){
+      this.ent = false;
+    } else {
+      this.ent = true;
+    }
   }
 
   /*public handleSingleSelect(answerID:string):void{
