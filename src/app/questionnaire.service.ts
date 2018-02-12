@@ -197,23 +197,25 @@ export class QuestionnaireService {
     public showPreviousQuestion(): void {
 
         if (this.QUESTIONNAIRE.currentQuestionIndex == 2 && this.domainPhase){
-
+        //HERE I AM CHOOSING THE DOMAINS
             this.domainPhase = false;
             this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
             this.QUESTIONNAIRE.selectedDomainList = [];
         } else if (this.QUESTIONNAIRE.currentQuestionIndex == 3 && !this.domainPhase) {
+            //HERE I AM COMING BACK IN THE DOMAIN PHASE
             this.domainPhase = true;
             this.questionBehaviour.next(this.question_of_domains);
             this.QUESTIONNAIRE.currentQuestionIndex--;
             this.QUESTIONNAIRE.completedQuestionList.splice(this.QUESTIONNAIRE.currentQuestionIndex+1,1);
-            this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.splice(1,1);
+            this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.splice(0);
+            this.QUESTIONNAIRE.selectedDomainList.splice(0);
         }else {
             this.QUESTIONNAIRE.currentQuestionIndex--;
             this.questionBehaviour.next(this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex]);
             this.QUESTIONNAIRE.completedQuestionList.splice(this.QUESTIONNAIRE.currentQuestionIndex + 1, 1);
             console.log("Current question index: " + this.QUESTIONNAIRE.currentQuestionIndex);
 
-            this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.splice(0, 1);
+            this.QUESTIONNAIRE.completedQuestionList[this.QUESTIONNAIRE.currentQuestionIndex].givenAnswerList.splice(0);
             console.log(this.QUESTIONNAIRE);
         }
 
